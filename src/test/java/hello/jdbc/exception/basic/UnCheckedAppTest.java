@@ -1,12 +1,13 @@
 package hello.jdbc.exception.basic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.net.ConnectException;
 import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
+@Slf4j
 public class UnCheckedAppTest {
     @Test
     void unchecked(){
@@ -18,6 +19,16 @@ public class UnCheckedAppTest {
         Service service = new Service();
         public void request() throws SQLException, ConnectException {
             service.logic();
+        }
+    }
+    @Test
+    void printEx(){
+        Controller controller = new Controller();
+        try {
+            controller.request();
+        } catch (Exception e) {
+            //e.printStackTrace();
+            log.info("ex", e);
         }
     }
 
